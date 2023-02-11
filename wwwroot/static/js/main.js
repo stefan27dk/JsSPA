@@ -24,18 +24,14 @@ const routes = {
 // The method that gets the current view and injects it in the "app"" container div.
 const handleLocation = async () => {
     const path = window.location.pathname; 
-    const currentRoute = routes[path] || routes['/Home']; // If there is no match go to Home "/" if the url is not found in the "routes object" than load home
-    const html = await currentRoute.prototype.getHtml();
-    document.getElementById("app").innerHTML = html;
+    const currentRoute = routes[path] || routes['/']; // If there is no match go to Home "/" if the url is not found in the "routes object" than load home
+    document.getElementById("app").innerHTML = await currentRoute.prototype.getHtml();;
     //await route.prototype.executeViewScript();
 };
 
 
 // On-Navigating-Back&Forth-Load the Content--Together with the url------------------------------------------------------------------------------------>
 window.addEventListener("popstate", handleLocation); // On popstate "If back button is pressed" use the method to load back the previeous SPA View
-//window.onpopstate = handleLocation;
-//window.route = route; // Assign router to Global variable so it can be acceset anywere instead can be exportet as module
-
 
 
 
