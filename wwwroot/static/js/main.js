@@ -1,10 +1,10 @@
-﻿// Imports
-import Home from "./views/Home.js";
-import Login from "./views/Login.js";
-import Register from "./views/Register.js";
+﻿// Imports ------------------------------------------------------------------------------------------------
+import * as Home from "./views/Home.js";
+import * as Login from "./views/Login.js";
+import * as Register from "./views/Register.js";
 
 
-
+// Router  ------------------------------------------------------------------------------------------------
 const router = (e) => {
     e = event || window.event;
     e.preventDefault(); // Prevent deafult behavior don't follow the link
@@ -13,7 +13,7 @@ const router = (e) => {
 };
 
 
-// The defined routes of the page
+//Routes ------------ The defined routes of the SPA APP ---------------------------------------------------
 const routes = {
     '/': Home, // On Path "/" use the HomeView class and inject html in the #app div
     '/Login': Login,
@@ -22,11 +22,12 @@ const routes = {
  
 
 // The method that gets the current view and injects it in the "app"" container div.
+// Handle location  ---------------------------------------------------------------------------------------
 const handleLocation = async () => {
     const path = window.location.pathname; 
     const currentRoute = routes[path] || routes['/']; // If there is no match go to Home "/" if the url is not found in the "routes object" than load home
-    document.getElementById("app").innerHTML = await currentRoute.prototype.getHtml();;
-    //await route.prototype.executeViewScript();
+    document.getElementById("app").innerHTML = await currentRoute.getHtmlAsync(); // Get the Html code for the specific View
+    await currentRoute.executeViewScriptAsync(); // Execute the View script "If there is specific script to be executet to the specific view"
 };
 
 
@@ -49,227 +50,4 @@ document.addEventListener("DOMContentLoaded", () => { // On Dom loaded add bodyE
 handleLocation(); // Handle location on page load otherwise the location will be handled on decorated link with data-link click or on popstate a.k.a on back and forth browser button click with window.addEventListener("popstate"...
 
 
-
-
-
-
-
-
-// Tests ============================================================
-// Winer is Object dictionaries get by key value
-
-//// OBJECT with props ------------------------
-//const routes1 = {
-    
-//};
-
-
-//// Add 1000 props 
-//for (var i = 0; i < 1000; i++)
-//{
-//    routes1[i++] = 'prop' + i++;
-//    i++;
-//}
-
-
-
-
-//routes1['/Home'] =  Home;
-//routes1['/Login'] = Login;
-//routes1['/Register'] = Register;
-
-
-
-
-//// Methods ------------------------
-//// Object key values
-//const getObjectProp = (path) => {
-//    return routes1[path];
-//}
-
-
-
-
-//console.log("The OBJECT");
-//console.log("GET with Key Value pairs:");
-
-//console.time();
-//getObjectProp('/Register');
-//console.timeEnd();
-//console.log(getObjectProp('/Register'));
-
-
-
-
-
-
-
-
-//// With for loop
-
-//const getObjectPropWithForloop = (path) =>
-//{
-//    for (const prop in routes1)
-//    {
-//        if (prop == path)
-//        {
-//            return routes1[prop]; 
-//        }
-//    }
-
-//}
-
-
-
-
-
-
-//console.log("The OBJECT");
-//console.log("GET with Key Forloop:");
-
-//console.time();
-//getObjectPropWithForloop('/Register');
-//console.timeEnd();
-//console.log(getObjectPropWithForloop('/Register'));
-
-
-
-
-
-////// - ARRAY -------------------------------------------------
-
-
-//const array = [];
-
-
-//// Add 1000 props 
-//for (var i = 0; i < 1000; i++) {
-//    array[i] = {path: `${i} path`, view: i + "VIEW" }
-//    i++;
-//}
-
-
-
-//array[998] = { path: "/Home", view: Home };
-//array[999] = { path: "/Login", view: Login };
-//array[1000] = { path: "/Register", view: Register };
  
-
-
-//const getArrayObj = (path) =>
-//{
-//    const length = array.length;
-//    for (let i = 0; i < length; i++)
-//    {
-//        if (array[i].path == path)
-//        {
-//            return array[i].view;
-//        }
-//        i++;
-//    }
-//}
-
-
-
-
-
-//console.log("The ARRAY");
-//console.log("GET Array with Forloop:");
-
-//console.time();
-//getArrayObj('/Register');
-//console.timeEnd();
-//console.log(getArrayObj('/Register'));
-
-
-
-
-
-
-
-
-
-
-
-
-//// Array
-//const array1 = [];
-
-
-
-//for (var i = 0; i < 1000; i++) {
-//    array1[i] = 'prop' + i++;
-//    i++;
-//}
-
-
-
-
-
-
-
-
-//// ARRAY -------------------------------------    
-//const routes2 = [
-//    { path: "Home", view: Home },
-//    { path: "/Login", view: Login },
-//    { path: "/Register", view: Register }
-
-//];
-
-
-
-//const getObjectProp = (path) => {
-//    console.log(routes1[path]);
-//    return routes1[path];
-//}
-
-
-
-//const getOArrayItem = (path) => {
-//    const length = array1.length;
-
-//    for (var i = 0; i < length; i++)
-//    {
-//        if (array1[i] == path)
-//        {
-//            console.log(array1[i].view);
-//            return array1[i].view; 
-//        }
-//    } 
-//}
-
-
-
-
-//const getAccociativeArrayItem = () =>
-//{
-//    console.log(array1[990]);
-//    return array1[990];
-//}
-
-
-
-//console.log('The Dictionary:');
-//console.log(routes1);
-
-
-//console.log("The OBJECT");
-//console.time();
-//getObjectProp('/Register');
-//console.timeEnd();
-
-
-//console.log("The ARRAY");
-//console.time();
-//getOArrayItem('/Register');
-//console.timeEnd();
-
-
-
-//console.log("Accociative ARRAY");
-//console.time();
-//getAccociativeArrayItem('/Register');
-//console.timeEnd();
-
-
